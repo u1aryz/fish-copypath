@@ -184,7 +184,8 @@ check_successful_path 'empty path' "$work_dir" ''
 check_successful_path 'relative path' "$work_dir/missing file" 'directory/../missing file'
 check_successful_path 'absolute path' "$work_dir/absolute" "$work_dir/absolute"
 check_successful_path 'leading hyphen path' "$work_dir/-draft" -draft
-check_successful_path 'Unicode path' "$work_dir/日本語" 日本語
+set -l unicode_path (string unescape 'fish-\U0001F41F')
+check_successful_path 'Unicode path' "$work_dir/$unicode_path" "$unicode_path"
 check_successful_path 'symbolic-link path' "$work_dir/link/file" 'link/./file'
 set -l newline_path "line
 break"
