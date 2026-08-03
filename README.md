@@ -21,14 +21,14 @@ Copy the current directory:
 
 ```console
 $ copypath
-/home/user/project copied to clipboard.
+Copied: /home/user/project
 ```
 
 Copy a file or directory path:
 
 ```console
 $ copypath ./README.md
-/home/user/project/README.md copied to clipboard.
+Copied: /home/user/project/README.md
 ```
 
 Relative paths are converted to absolute paths without resolving symbolic links. File and directory completion is available for the path argument.

@@ -26,5 +26,5 @@ function copypath --description 'Copy an absolute path to the clipboard'
         return $copy_status
     end
 
-    printf '%s copied to clipboard.\n' "$absolute_path"
+    printf 'Copied: %s\n' "$absolute_path"
 end

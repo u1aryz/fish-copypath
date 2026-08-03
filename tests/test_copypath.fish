@@ -111,7 +111,7 @@ function run_backend_case
 
     printf '%s' "$target" >"$case_dir/expected-content"
     assert_file_equal "$backend receives the path without a trailing newline" "$case_dir/expected-content" "$case_dir/content"
-    printf '%s copied to clipboard.\n' "$target" >"$case_dir/expected-stdout"
+    printf 'Copied: %s\n' "$target" >"$case_dir/expected-stdout"
     assert_file_equal "$backend produces the success message" "$case_dir/expected-stdout" "$case_dir/stdout"
     printf '' >"$case_dir/expected-stderr"
     assert_file_equal "$backend does not produce an error" "$case_dir/expected-stderr" "$case_dir/stderr"
@@ -134,7 +134,7 @@ function check_successful_path
 
     printf '%s' "$expected_path" >"$case_dir/expected-content"
     assert_file_equal "$description copies the expected path" "$case_dir/expected-content" "$case_dir/content"
-    printf '%s copied to clipboard.\n' "$expected_path" >"$case_dir/expected-stdout"
+    printf 'Copied: %s\n' "$expected_path" >"$case_dir/expected-stdout"
     assert_file_equal "$description prints the expected path" "$case_dir/expected-stdout" "$case_dir/stdout"
 end
 
