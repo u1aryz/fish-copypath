@@ -1,6 +1,7 @@
 # fish-copypath
 
 [![CI](https://github.com/u1aryz/fish-copypath/actions/workflows/ci.yml/badge.svg)](https://github.com/u1aryz/fish-copypath/actions/workflows/ci.yml)
+[![GitHub Release](https://img.shields.io/github/v/release/u1aryz/fish-copypath)](https://github.com/u1aryz/fish-copypath/releases/latest)
 [![Fish Shell](https://img.shields.io/badge/fish-3.5%2B-4AAE47?logo=fishshell&logoColor=white)](https://fishshell.com/)
 [![Fisher](https://img.shields.io/badge/Fisher-compatible-00A4CC)](https://github.com/jorgebucaran/fisher)
 [![License](https://img.shields.io/github/license/u1aryz/fish-copypath)](LICENSE)
