@@ -10,47 +10,7 @@ permissions:
 
 jobs:
   test:
-    name: Test on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os:
-          - ubuntu-latest
-          - macos-latest
-
-    steps:
-      - name: Check out the repository
-        uses: actions/checkout@v4
-
-      - name: Install Fish
-        uses: fish-actions/install-fish@v1.1.0
-
-      - name: Check Fish syntax
-        shell: fish {0}
-        run: fish --no-config --no-execute functions/*.fish completions/*.fish tests/*.fish
-
-      - name: Check Fish formatting
-        shell: fish {0}
-        run: fish_indent --check functions/*.fish completions/*.fish tests/*.fish
-
-      - name: Run tests
-        shell: fish {0}
-        run: fish --no-config tests/test_copypath.fish
-
-      - name: Verify Fisher installation
-        shell: fish {0}
-        env:
-          XDG_CONFIG_HOME: ${{ runner.temp }}/fish-copypath-config
-        run: |
-          curl --silent --show-error --location \
-            https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish \
-            | source
-          fisher install .
-          test -f $XDG_CONFIG_HOME/fish/functions/copypath.fish
-          test -f $XDG_CONFIG_HOME/fish/functions/__copypath_copy.fish
-          test -f $XDG_CONFIG_HOME/fish/completions/copypath.fish
-          fish --command 'type --query copypath'
+    uses: ./.github/workflows/ci.yml
 
   release:
     name: Create GitHub Release
@@ -60,9 +20,6 @@ jobs:
       contents: write
 
     steps:
-      - name: Check out the repository
-        uses: actions/checkout@v4
-
       - name: Create GitHub Release
         run: gh release create "$GITHUB_REF_NAME" --verify-tag --generate-notes --title "$GITHUB_REF_NAME"
         env:
