@@ -7,7 +7,10 @@ let height = 460
 let titleBarHeight: CGFloat = 44
 let windowControlSize: CGFloat = 12
 let framesPerSecond = 12.0
-let duration = 8.5
+let playbackSpeed = 2.0
+let timelineDuration = 8.5
+let additionalCursorBlinkDuration = 1.0
+let duration = timelineDuration / playbackSpeed + additionalCursorBlinkDuration
 let frameCount = Int(duration * framesPerSecond)
 let outputURL = URL(fileURLWithPath: CommandLine.arguments.dropFirst().first ?? "docs/assets/demo.gif")
 
@@ -40,7 +43,8 @@ func draw(_ text: String, x: CGFloat, y: CGFloat, color: NSColor, using selected
 }
 
 for frame in 0..<frameCount {
-    let time = Double(frame) / framesPerSecond
+    let playbackTime = Double(frame) / framesPerSecond
+    let time = playbackTime * playbackSpeed
     let bitmap = NSBitmapImageRep(
         bitmapDataPlanes: nil,
         pixelsWide: width,
@@ -96,7 +100,7 @@ for frame in 0..<frameCount {
     }
     if time >= 6.0 {
         draw("❯", x: left, y: 390, color: green)
-        if Int(time * 2).isMultiple(of: 2) {
+        if Int(playbackTime * 2).isMultiple(of: 2) {
             NSColor(calibratedRed: 0.72, green: 0.76, blue: 0.80, alpha: 1).setFill()
             NSBezierPath(rect: NSRect(x: left + 34, y: CGFloat(height - 415), width: 13, height: 25)).fill()
         }
