@@ -4,6 +4,8 @@ import UniformTypeIdentifiers
 
 let width = 900
 let height = 460
+let titleBarHeight: CGFloat = 44
+let windowControlSize: CGFloat = 12
 let framesPerSecond = 12.0
 let duration = 8.5
 let frameCount = Int(duration * framesPerSecond)
@@ -21,9 +23,7 @@ CGImageDestinationSetProperties(destination, [
 ] as CFDictionary)
 
 let font = NSFont.monospacedSystemFont(ofSize: 23, weight: .regular)
-let titleFont = NSFont.systemFont(ofSize: 14, weight: .medium)
 let foreground = NSColor(calibratedRed: 0.86, green: 0.89, blue: 0.92, alpha: 1)
-let muted = NSColor(calibratedRed: 0.58, green: 0.63, blue: 0.68, alpha: 1)
 let green = NSColor(calibratedRed: 0.31, green: 0.78, blue: 0.47, alpha: 1)
 let blue = NSColor(calibratedRed: 0.38, green: 0.67, blue: 0.96, alpha: 1)
 
@@ -60,19 +60,18 @@ for frame in 0..<frameCount {
     NSBezierPath(rect: NSRect(x: 0, y: 0, width: width, height: height)).fill()
 
     NSColor(calibratedRed: 0.09, green: 0.11, blue: 0.14, alpha: 1).setFill()
-    NSBezierPath(rect: NSRect(x: 0, y: height - 54, width: width, height: 54)).fill()
+    NSBezierPath(rect: NSRect(x: 0, y: CGFloat(height) - titleBarHeight, width: CGFloat(width), height: titleBarHeight)).fill()
 
     let windowControls: [(CGFloat, NSColor)] = [
         (26, .systemRed),
         (48, .systemYellow),
         (70, .systemGreen),
     ]
+    let windowControlY = CGFloat(height) - (titleBarHeight + windowControlSize) / 2
     for (x, color) in windowControls {
         color.setFill()
-        NSBezierPath(ovalIn: NSRect(x: x, y: CGFloat(height - 33), width: 12, height: 12)).fill()
+        NSBezierPath(ovalIn: NSRect(x: x, y: windowControlY, width: windowControlSize, height: windowControlSize)).fill()
     }
-    draw("fish-copypath demo", x: 354, y: 18, color: muted, using: titleFont)
-
     let left: CGFloat = 42
     if time >= 0.7 {
         draw("❯", x: left, y: 90, color: green)
