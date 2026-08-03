@@ -7,7 +7,7 @@
 
 A cross-platform Fish shell plugin that copies absolute file and directory paths to the system clipboard.
 
-![fish-copypath demo](assets/demo.gif)
+![fish-copypath demo](docs/assets/demo.gif)
 
 ## Why fish-copypath?
 

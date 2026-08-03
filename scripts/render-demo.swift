@@ -7,7 +7,7 @@ let height = 460
 let framesPerSecond = 12.0
 let duration = 8.5
 let frameCount = Int(duration * framesPerSecond)
-let outputURL = URL(fileURLWithPath: CommandLine.arguments.dropFirst().first ?? "assets/demo.gif")
+let outputURL = URL(fileURLWithPath: CommandLine.arguments.dropFirst().first ?? "docs/assets/demo.gif")
 
 let destination = CGImageDestinationCreateWithURL(
     outputURL as CFURL,
