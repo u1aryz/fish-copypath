@@ -42,6 +42,30 @@ func draw(_ text: String, x: CGFloat, y: CGFloat, color: NSColor, using selected
     )
 }
 
+func drawToast(_ text: String) {
+    let toastFont = NSFont.systemFont(ofSize: 17, weight: .medium)
+    let textSize = (text as NSString).size(withAttributes: [.font: toastFont])
+    let horizontalPadding: CGFloat = 20
+    let toastWidth = textSize.width + horizontalPadding * 2
+    let toastHeight: CGFloat = 44
+    let toastRect = NSRect(
+        x: CGFloat(width) - toastWidth - 28,
+        y: 28,
+        width: toastWidth,
+        height: toastHeight
+    )
+
+    NSColor(calibratedRed: 0.16, green: 0.19, blue: 0.24, alpha: 1).setFill()
+    NSBezierPath(roundedRect: toastRect, xRadius: 10, yRadius: 10).fill()
+    draw(
+        text,
+        x: toastRect.minX + horizontalPadding,
+        y: CGFloat(height) - toastRect.midY - toastFont.pointSize / 2 - 2,
+        color: foreground,
+        using: toastFont
+    )
+}
+
 for frame in 0..<frameCount {
     let playbackTime = Double(frame) / framesPerSecond
     let time = playbackTime * playbackSpeed
@@ -93,10 +117,12 @@ for frame in 0..<frameCount {
     }
     if time >= 4.35 {
         draw("❯", x: left, y: 290, color: green)
-        draw(typed("pbpaste", from: 4.5, at: time), x: left + 34, y: 290, color: foreground)
     }
-    if time >= 5.25 {
-        draw("/Users/me/src/fish-copypath/README.md", x: left, y: 330, color: blue)
+    if time >= 4.35 && time < 8.5 {
+        drawToast("Paste from clipboard")
+    }
+    if time >= 4.75 {
+        draw("/Users/me/src/fish-copypath/README.md", x: left + 34, y: 290, color: blue)
     }
     if time >= 6.0 {
         draw("❯", x: left, y: 390, color: green)
